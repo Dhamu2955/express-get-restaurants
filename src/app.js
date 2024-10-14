@@ -24,11 +24,10 @@ app.post("/restaurants", async (request, response) => {
     response.json(newRestaurant)
 })
 
-app.put("./restaurants/:id", async (request, response) => {
+app.put("/restaurants/:id", async (request, response) => {
     const updateRestaurant = await Restaurant.update(
         request.body,
         {where: {id: request.params.id}})
-    response.json(updateRestaurant[1][0])
 })
 
 app.delete("/restaurants/:id", async (request, response) => {
