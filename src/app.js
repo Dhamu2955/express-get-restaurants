@@ -14,7 +14,25 @@ app.get("/restaurants/:id", async (request, response) => {
     const restaurantId = request.params.id
     const restaurant = await Restaurant.findByPk(restaurantId)
     response.json(restaurant)
+})
 
+app.use(express.json())
+app.use(express.urlencoded())
+
+app.post("/restaurants", async (request, response) => {
+    const newRestaurant = await Restaurant.create(request.body)
+    response.json(newRestaurant)
+})
+
+app.put("./restaurants/:id", async (request, response) => {
+    const updateRestaurant = await Restaurant.update(
+        request.body,
+        {where: {id: request.params.id}})
+    response.json(updateRestaurant[1][0])
+})
+
+app.delete("/restaurants/:id", async (request, response) => {
+    const deletedRestaurant = await Restaurant.destroy({where: {id: request.params.id}})
 })
 
 module.exports = app;
