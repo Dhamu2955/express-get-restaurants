@@ -10,5 +10,11 @@ app.get("/restaurants", async (request, response) =>{
     response.json(data)
 })
 
+app.get("/restaurants/:id", async (request, response) => {
+    const restaurantId = request.params.id
+    const restaurant = await Restaurant.findByPk(restaurantId)
+    response.json(restaurant)
+
+})
 
 module.exports = app;
